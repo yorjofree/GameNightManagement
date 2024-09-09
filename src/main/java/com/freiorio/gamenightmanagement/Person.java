@@ -7,6 +7,7 @@ public class Person {
     private String lastname;
     private String CF;
     private boolean associate;
+    private int score;
 
     public Person(String name, String lastname, String CF, boolean associate) {
         this.name = name;
@@ -46,6 +47,14 @@ public class Person {
 
     public void setAssociate(boolean associate) {
         this.associate = associate;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     @Override
