@@ -2,7 +2,7 @@ package com.freiorio.gamenightmanagement;
 
 import java.util.Objects;
 
-public class Person {
+public class Person implements Comparable<Person>{
     private String name;
     private String lastname;
     private String CF;
@@ -95,5 +95,10 @@ public class Person {
         if (!CF.matches("[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]")) {
             throw new IllegalArgumentException("CF format string is not correct. Correct format is AAAAAAddAddAdddA (A=alphabetic uppercase, d=digit)");
         }
+    }
+
+    @Override
+    public int compareTo(Person o) {
+        return this.nickname.compareTo(o.getNickname());
     }
 }

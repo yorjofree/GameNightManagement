@@ -5,13 +5,13 @@ import javafx.collections.ObservableList;
 
 public class Table {
     private String game;
-    private ObservableList<Person> gamers;
+    private ObservableList<Person> players;
     private boolean started;
     private boolean ended;
 
-    public Table(String game, ObservableList<Person> gamers) {
+    public Table(String game, ObservableList<Person> players) {
         this.game = game;
-        this.gamers = gamers;
+        this.players = players;
         this.started = false;
         this.ended = false;
     }
@@ -24,20 +24,20 @@ public class Table {
         this.game = game;
     }
 
-    public ObservableList<Person> getGamers() {
-        return gamers;
+    public ObservableList<Person> getPlayers() {
+        return players;
     }
 
-    public void setGamers(ObservableList<Person> gamers) {
-        this.gamers = gamers;
+    public void setPlayers(ObservableList<Person> players) {
+        this.players = players;
     }
 
-    public boolean addGamer(Person gamer) {
-        return gamers.add(gamer);
+    public boolean addPlayer(Person player) {
+        return players.add(player);
     }
 
-    public boolean removeGamer(Person gamer) {
-        return gamers.remove(gamer);
+    public boolean removePlayer(Person player) {
+        return players.remove(player);
     }
 
     public boolean isStarted() {
