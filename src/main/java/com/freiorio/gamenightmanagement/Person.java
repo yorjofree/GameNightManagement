@@ -6,14 +6,27 @@ public class Person {
     private String name;
     private String lastname;
     private String CF;
+    private String nickname;
     private boolean associate;
     private int score;
 
-    public Person(String name, String lastname, String CF, boolean associate) {
+
+    public Person(String name, String lastname, String nickname, boolean associate) {
+        this.name = name;
+        this.lastname = lastname;
+        this.nickname = nickname;
+        this.associate = associate;
+        this.CF = "unknown";
+        this.score = 0;
+    }
+
+    public Person(String name, String lastname, String CF, String nickname, boolean associate, int score) {
         this.name = name;
         this.lastname = lastname;
         setCF(CF);
+        this.nickname = nickname;
         this.associate = associate;
+        this.score = score;
     }
 
     public String getName() {
@@ -41,6 +54,14 @@ public class Person {
         this.CF = CF;
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
     public boolean isAssociate() {
         return associate;
     }
@@ -62,12 +83,12 @@ public class Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return Objects.equals(getCF(), person.getCF());
+        return Objects.equals(getNickname(), person.getNickname());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getCF());
+        return Objects.hashCode(getNickname());
     }
 
     private void checkValidCF (String CF) throws IllegalArgumentException {
