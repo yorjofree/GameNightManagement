@@ -1,17 +1,23 @@
 package com.freiorio.gamenightmanagement;
 
 import javafx.beans.Observable;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
+
+import java.util.Set;
 
 public class Table {
     private String game;
-    private ObservableList<Person> players;
+    private ObservableSet<Person> players;
+    private int nPlayers;
     private boolean started;
     private boolean ended;
 
-    public Table(String game, ObservableList<Person> players) {
+    public Table(String game, int nPlayers) {
         this.game = game;
-        this.players = players;
+        this.players = FXCollections.observableSet(Set.of());
+        this.nPlayers = nPlayers;
         this.started = false;
         this.ended = false;
     }
@@ -24,12 +30,24 @@ public class Table {
         this.game = game;
     }
 
-    public ObservableList<Person> getPlayers() {
+    public ObservableSet<Person> getPlayers() {
         return players;
     }
 
-    public void setPlayers(ObservableList<Person> players) {
+    public void setPlayers(ObservableSet<Person> players) {
         this.players = players;
+    }
+
+    public int getNPlayers() {
+        return nPlayers;
+    }
+
+    public void setNPlayers(int nPlayers) {
+        this.nPlayers = nPlayers;
+    }
+
+    public int getNAvailable() {
+        return getNPlayers() - players.size();
     }
 
     public boolean addPlayer(Person player) {
