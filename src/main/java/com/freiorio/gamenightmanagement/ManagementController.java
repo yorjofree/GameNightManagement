@@ -1,28 +1,23 @@
 package com.freiorio.gamenightmanagement;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArrayBase;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Popup;
-import javafx.stage.PopupWindow;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class ManagementController {
     @FXML
     private Label emptyTablesView;
+    @FXML
     private TableView<Person> peopleView;
     @FXML
     protected TableView<Table> tablesView;
@@ -40,6 +35,10 @@ public class ManagementController {
     protected ObservableSet<Person> people;
     @FXML
     protected ObservableList<Table> tables;
+    @FXML
+    private ButtonBar tableViewButtonBar;
+
+    private Table selectedTable;
 
     @FXML
     protected void onNewPersonClick(ActionEvent event) {
@@ -69,5 +68,12 @@ public class ManagementController {
         tables.add(controller.getTable());
     }
 
-
+    @FXML
+    protected void onTableViewClick(MouseEvent event) {
+        TableView.TableViewSelectionModel<Table> selectionModel = tablesView.getSelectionModel();
+        if (!selectionModel.isEmpty()) {
+            tableViewButtonBar.setDisable(false);
+            selectedTable = selectionModel.getSelectedItem();
+        }
+    }
 }

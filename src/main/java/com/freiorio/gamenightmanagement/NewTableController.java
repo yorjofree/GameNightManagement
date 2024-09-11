@@ -13,6 +13,7 @@ import javafx.stage.WindowEvent;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class NewTableController {
@@ -32,9 +33,11 @@ public class NewTableController {
     protected void onAddTableButtonClick(ActionEvent event) {
         String gameName = gameTextField.getText();
         int n = numberOfPlayers.getValue();
-        table = new Table(gameName, n);
-        Stage stage = (Stage) gameTextField.getScene().getWindow();
-        stage.close();
+        if (gameName != null && !gameName.isEmpty()) {
+            table = new Table(gameName, n);
+            Stage stage = (Stage) gameTextField.getScene().getWindow();
+            stage.close();
+        }
     }
 
     public Table getTable() {

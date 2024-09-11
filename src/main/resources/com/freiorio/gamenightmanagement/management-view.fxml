@@ -89,7 +89,7 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <TableView fx:id="tablesView" prefHeight="571.0" prefWidth="805.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="tablesView" onMouseClicked="#onTableViewClick" prefHeight="571.0" prefWidth="805.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
                                   <TableColumn fx:id="game" prefWidth="75.0" text="Game" />
                                   <TableColumn fx:id="nMax" maxWidth="100.0" minWidth="50.0" prefWidth="75.0" text="n. MAX" />
@@ -103,7 +103,7 @@
                               </TableView>
                            </children>
                         </AnchorPane>
-                        <ButtonBar disable="true" prefHeight="40.0" prefWidth="200.0">
+                        <ButtonBar fx:id="tableViewButtonBar" disable="true" prefHeight="40.0" prefWidth="200.0">
                           <buttons>
                             <Button mnemonicParsing="false" text="Remove table" />
                               <Button mnemonicParsing="false" text="Add player" />
