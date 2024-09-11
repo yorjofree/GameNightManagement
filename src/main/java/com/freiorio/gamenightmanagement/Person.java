@@ -10,13 +10,21 @@ public class Person implements Comparable<Person>{
     private boolean associate;
     private int score;
 
+    public Person(String nickname) {
+        this.name = "";
+        this.lastname = "";
+        this.CF = "";
+        this.nickname = nickname;
+        this.associate = false;
+        this.score = 0;
+    }
 
     public Person(String name, String lastname, String nickname, boolean associate) {
         this.name = name;
         this.lastname = lastname;
         this.nickname = nickname;
         this.associate = associate;
-        this.CF = "unknown";
+        this.CF = "";
         this.score = 0;
     }
 

@@ -1,10 +1,14 @@
 package com.freiorio.gamenightmanagement;
 
 import javafx.beans.Observable;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleSetProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class Table {
@@ -16,7 +20,7 @@ public class Table {
 
     public Table(String game, int nPlayers) {
         this.game = game;
-        this.players = FXCollections.observableSet(Set.of());
+        this.players = FXCollections.observableSet(new LinkedHashSet<>());
         this.nPlayers = nPlayers;
         this.started = false;
         this.ended = false;
@@ -36,6 +40,12 @@ public class Table {
 
     public void setPlayers(ObservableSet<Person> players) {
         this.players = players;
+    }
+
+    public LinkedHashSet<String> getNicknameSet() {
+        LinkedHashSet<String> nicknameSet = new LinkedHashSet<>();
+        players.forEach(player -> nicknameSet.add(player.getNickname()));
+        return nicknameSet;
     }
 
     public int getNPlayers() {

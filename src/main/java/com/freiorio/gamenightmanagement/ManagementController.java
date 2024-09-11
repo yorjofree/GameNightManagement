@@ -52,7 +52,7 @@ public class ManagementController {
         game.setCellValueFactory(new PropertyValueFactory<>("game"));
         nMax.setCellValueFactory(new PropertyValueFactory<>("nPlayers"));
         nAvailable.setCellValueFactory(new PropertyValueFactory<>("nAvailable"));
-        players.setCellValueFactory(new PropertyValueFactory<>("players"));
+        players.setCellValueFactory(new PropertyValueFactory<>("nicknameSet"));
 
     }
 
@@ -76,4 +76,25 @@ public class ManagementController {
             selectedTable = selectionModel.getSelectedItem();
         }
     }
+
+    @FXML
+    protected void onRemoveTableButtonClick(ActionEvent event) {
+        tables.remove(selectedTable);
+    }
+
+    @FXML
+    protected void onAddPlayerClick(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ManagementController.class.getResource("add-player-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 300, 120);
+        AddPlayerController controller = fxmlLoader.getController();
+        controller.setTable(selectedTable);
+
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Add player");
+        stage.showAndWait();
+        tablesView.refresh();
+    }
+
+
 }

@@ -105,8 +105,8 @@
                         </AnchorPane>
                         <ButtonBar fx:id="tableViewButtonBar" disable="true" prefHeight="40.0" prefWidth="200.0">
                           <buttons>
-                            <Button mnemonicParsing="false" text="Remove table" />
-                              <Button mnemonicParsing="false" text="Add player" />
+                            <Button mnemonicParsing="false" onAction="#onRemoveTableButtonClick" text="Remove table" />
+                              <Button mnemonicParsing="false" onAction="#onAddPlayerClick" text="Add player" />
                               <Button mnemonicParsing="false" text="Remove player" />
                               <Button mnemonicParsing="false" text="Start game" />
                               <Button mnemonicParsing="false" text="End game" />
