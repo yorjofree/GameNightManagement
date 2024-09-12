@@ -13,12 +13,19 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
 
 public class ManagementController {
     @FXML
     private Label emptyTablesView;
     @FXML
     private TableView<Person> peopleView;
+    @FXML
+    private TableColumn<Person, String> nickname;
+    @FXML
+    private TableColumn<Person, Integer> score;
     @FXML
     protected TableView<Table> tablesView;
     @FXML
@@ -30,9 +37,9 @@ public class ManagementController {
     @FXML
     protected TableColumn<Table, ObservableSet<Person>> players;
     @FXML
-    protected TableColumn<Table, String> time;
+    protected TableColumn<Table, String> state;
     @FXML
-    protected ObservableSet<Person> people;
+    protected ObservableList<Person> people;
     @FXML
     protected ObservableList<Table> tables;
     @FXML
@@ -46,14 +53,19 @@ public class ManagementController {
 
     public void initialize() {
         tables = FXCollections.observableArrayList();
+        people = FXCollections.observableArrayList();
         tablesView.setItems(tables);
         tablesView.setPlaceholder(emptyTablesView);
 
         game.setCellValueFactory(new PropertyValueFactory<>("game"));
         nMax.setCellValueFactory(new PropertyValueFactory<>("nPlayers"));
         nAvailable.setCellValueFactory(new PropertyValueFactory<>("nAvailable"));
-        players.setCellValueFactory(new PropertyValueFactory<>("nicknameSet"));
+        players.setCellValueFactory(new PropertyValueFactory<>("nicknames"));
+        state.setCellValueFactory(new PropertyValueFactory<>("state"));
 
+        peopleView.setItems(people);
+        nickname.setCellValueFactory(new PropertyValueFactory<>("nickname"));
+        score.setCellValueFactory(new PropertyValueFactory<>("score"));
     }
 
     @FXML
@@ -80,6 +92,7 @@ public class ManagementController {
     @FXML
     protected void onRemoveTableButtonClick(ActionEvent event) {
         tables.remove(selectedTable);
+        tableViewButtonBar.setDisable(true);
     }
 
     @FXML
@@ -88,13 +101,74 @@ public class ManagementController {
         Scene scene = new Scene(fxmlLoader.load(), 300, 120);
         AddPlayerController controller = fxmlLoader.getController();
         controller.setTable(selectedTable);
+        controller.setPeople(people);
 
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Add player");
         stage.showAndWait();
+
+        System.out.println(people.contains(controller.getPerson()));
+        System.out.println(people.toString());
+        peopleView.refresh();
         tablesView.refresh();
+        tableViewButtonBar.setDisable(true);
     }
 
+    @FXML
+    protected void onRemovePlayerClick(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ManagementController.class.getResource("remove-player-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 300, 120);
+        RemovePlayerController controller = fxmlLoader.getController();
+        controller.setTable(selectedTable);
+        controller.setPlayers(selectedTable.getNicknames());
 
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Remove player");
+        stage.showAndWait();
+        tablesView.refresh();
+        tableViewButtonBar.setDisable(true);
+    }
+
+    @FXML
+    protected void onStartGameClick(ActionEvent event) {
+        if (selectedTable.isReady()) {
+            selectedTable.start();
+            tablesView.refresh();
+            tableViewButtonBar.setDisable(true);
+        }
+    }
+
+    @FXML
+    protected void onEndGameClick(ActionEvent event) throws IOException {
+        if (selectedTable.isStarted()) {
+            selectedTable.end();
+            tablesView.refresh();
+            tableViewButtonBar.setDisable(true);
+
+            FXMLLoader fxmlLoader = new FXMLLoader(ManagementController.class.getResource("end-game-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 300, 400);
+            EndGameController controller = fxmlLoader.getController();
+            controller.setPeople(people);
+            controller.setPlayers(selectedTable.getNicknames());
+
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Remove player");
+            stage.showAndWait();
+        }
+    }
+
+    @FXML
+    protected void onViewRanking(MouseEvent event) {
+        peopleView.setVisible(true);
+        peopleView.refresh();
+    }
+
+    @FXML
+    protected void onViewTables(MouseEvent event) {
+        peopleView.setVisible(false);
+        tablesView.refresh();
+    }
 }

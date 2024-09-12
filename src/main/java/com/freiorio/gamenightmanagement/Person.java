@@ -86,6 +86,10 @@ public class Person implements Comparable<Person>{
         this.score = score;
     }
 
+    public void addScore(int score) {
+        this.score += score;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

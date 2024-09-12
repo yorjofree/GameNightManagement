@@ -64,12 +64,12 @@
                               <Image url="@icons/soci.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="48.0" fitWidth="48.0" onMouseClicked="#onViewTables" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons/dice.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="48.0" fitWidth="48.0" onMouseClicked="#onViewRanking" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons/ranking2.png" />
                            </image>
@@ -95,7 +95,7 @@
                                   <TableColumn fx:id="nMax" maxWidth="100.0" minWidth="50.0" prefWidth="75.0" text="n. MAX" />
                                     <TableColumn fx:id="nAvailable" maxWidth="100.0" minWidth="50.0" prefWidth="75.0" text="n. available" />
                                     <TableColumn fx:id="players" prefWidth="75.0" text="Players" />
-                                    <TableColumn fx:id="time" prefWidth="75.0" text="Time" />
+                                    <TableColumn fx:id="state" prefWidth="75.0" text="State" />
                                 </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -107,9 +107,9 @@
                           <buttons>
                             <Button mnemonicParsing="false" onAction="#onRemoveTableButtonClick" text="Remove table" />
                               <Button mnemonicParsing="false" onAction="#onAddPlayerClick" text="Add player" />
-                              <Button mnemonicParsing="false" text="Remove player" />
-                              <Button mnemonicParsing="false" text="Start game" />
-                              <Button mnemonicParsing="false" text="End game" />
+                              <Button mnemonicParsing="false" onAction="#onRemovePlayerClick" text="Remove player" />
+                              <Button mnemonicParsing="false" onAction="#onStartGameClick" text="Start game" />
+                              <Button mnemonicParsing="false" onAction="#onEndGameClick" text="End game" />
                           </buttons>
                            <VBox.margin>
                               <Insets />
@@ -120,6 +120,15 @@
                         </ButtonBar>
                      </children>
                   </VBox>
+                  <TableView fx:id="peopleView" prefHeight="573.0" prefWidth="805.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="nickname" prefWidth="75.0" text="Nickname" />
+                      <TableColumn fx:id="score" prefWidth="75.0" sortType="DESCENDING" text="Score" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
                </children>
             </AnchorPane>
         </items>

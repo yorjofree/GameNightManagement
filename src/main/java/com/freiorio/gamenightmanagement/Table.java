@@ -1,15 +1,12 @@
 package com.freiorio.gamenightmanagement;
 
-import javafx.beans.Observable;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleSetProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.List;
 
 public class Table {
     private String game;
@@ -42,8 +39,8 @@ public class Table {
         this.players = players;
     }
 
-    public LinkedHashSet<String> getNicknameSet() {
-        LinkedHashSet<String> nicknameSet = new LinkedHashSet<>();
+    public ObservableList<String> getNicknames() {
+        ObservableList<String> nicknameSet = FXCollections.observableList(new ArrayList<>());
         players.forEach(player -> nicknameSet.add(player.getNickname()));
         return nicknameSet;
     }
@@ -60,6 +57,16 @@ public class Table {
         return getNPlayers() - players.size();
     }
 
+    public String getState() {
+        if (isStarted() && !isEnded()) {
+            return "started";
+        }
+        if (isStarted() && isEnded()) {
+            return "ended";
+        }
+        return "ready";
+    }
+
     public boolean addPlayer(Person player) {
         return players.add(player);
     }
@@ -74,6 +81,10 @@ public class Table {
 
     public boolean isEnded() {
         return ended;
+    }
+
+    public boolean isReady() {
+        return !started && !ended;
     }
 
     public void start() {
